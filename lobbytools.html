@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lobby tools by mtbr29.dev</title>
+	<link rel="canonical" href="https://mtbr29.dev/lobbytools.html" />
+  <link rel="icon" href="logo.ico">
+ <meta property="og:title" content="👑Lobby tools🔢">
+    <meta property="og:description" content="lobby tools with: fake crowns👑, fake level🔢, ghost equip🕶 and more...">
+    <meta property="og:image" >
+    <meta property="og:url" content="https://mtbr29.dev">
+    <meta property="og:type" content="website">
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="👑Lobby tools🔢">
+    <meta name="twitter:description"lobby tools with: fake crowns👑, fake level🔢, ghost equip🕶 and more...">
+    <meta name="twitter:image" >
+    <meta name="twitter:url" content="https://mtbr29.dev">
+    <style>
+        /* CSS styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1, h2, h3 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .instructions, .form-section {
+            margin-top: 30px;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .error {
+            color: red;
+            margin-bottom: 20px;
+        }
+        .response {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #28a745;
+            text-align: center;
+        }
+        .api-response {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #e9ecef;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 14px;
+            color: #333;
+        }
+        .footer-links {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .footer-links a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #007bff;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        .profile {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .profile img {
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+        .profile-info {
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Log in to your Epic Games account</h1>
+        <div id="error-message" class="error" style="display:none;"></div>
+        <form id="login-form">
+            <label for="authcode">Authorization Code:</label>
+            <input type="text" id="authcode" name="authcode" required>
+            <button type="submit">Login</button>
+        </form>
+        <div id="profile-container" class="profile" style="display:none;">
+            <img id="profile-image" src="" alt="Profile Image" width="60" height="60">
+            <div id="profile-info" class="profile-info"></div>
+        </div>
+        <div id="actions-container" style="display:none;">
+            <h2>Party Management</h2>
+            <!-- Fake Crowns Form -->
+            <div class="form-section">
+                <h3>Fake Crowns</h3>
+                <form id="crown-form">
+                    <label for="crown-amount">Number of Crowns:</label>
+                    <input type="number" id="crown-amount" name="amount" min="1" required>
+                    <button type="submit">Fake Crowns</button>
+                </form>
+            </div>
+            <!-- Fake Level Form -->
+            <div class="form-section">
+                <h3>Fake Level</h3>
+                <form id="level-form">
+                    <label for="level">New Level:</label>
+                    <input type="number" id="level" name="level" min="1" required>
+                    <button type="submit">Fake Level</button>
+                </form>
+            </div>
+            <!-- Ghost Equip Form -->
+            <div class="form-section">
+                <h3>Ghost Equip</h3>
+                <form id="ghostequip-form">
+                    <label for="emote">Emote:</label>
+                    <input type="text" id="emote" name="emote" required>
+                    <button type="submit">Ghost Equip</button>
+                </form>
+            </div>
+            <!-- Fake Ready Form -->
+            <div class="form-section">
+                <h3>Fake Ready</h3>
+                <button id="ready-button">Fake Ready</button>
+            </div>
+            <!-- Fake Unready Form -->
+            <div class="form-section">
+                <h3>Fake Unready</h3>
+                <button id="unready-button">Fake Unready</button>
+            </div>
+            <!-- Refresh Tokens -->
+            <div class="form-section">
+                <h3>Refresh Tokens</h3>
+                <button id="refresh-tokens">Refresh Tokens</button>
+            </div>
+        </div>
+        <div id="response-message" class="response"></div>
+        <!-- API Response Section -->
+        <div id="api-response" class="api-response" style="display:none;"></div>
+        <div class="instructions">
+            <h2>Get Your Auth Code</h2>
+            <p>Step 1: <a href="https://www.epicgames.com/id/login" target="_blank">Login here</a></p>
+            <p>Step 2: Visit the <a href="https://www.epicgames.com/id/api/redirect?clientId=3446cd72694c4a4485d81b77adbb2141&responseType=code" target="_blank">link here</a> to get your login code.</p>
+            <p>Step 3: You should see a code after `?code=` in the URL.</p>
+        </div>
+        <div class="footer-links">
+            <a href="https://discord.gg/support" target="_blank">Join The Support Server</a> |
+            <a href="https://discord.com/invite/bot" target="_blank">Invite The Bot In Your Server</a>
+        </div>
+    </div>
+    <script>
+        let accountId, secret, deviceId;
+        let isReady = false;
+        document.getElementById('login-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const authcode = document.getElementById('authcode').value;
+            const errorMessage = document.getElementById('error-message');
+            const responseMessage = document.getElementById('response-message');
+            const actionsContainer = document.getElementById('actions-container');
+            const profileContainer = document.getElementById('profile-container');
+            const profileImage = document.getElementById('profile-image');
+            const profileInfo = document.getElementById('profile-info');
+            const apiResponse = document.getElementById('api-response');
+            if (!authcode) {
+                errorMessage.textContent = "Please provide the authorization code.";
+                errorMessage.style.display = 'block';
+                return;
+            }
+            try {
+                const response = await fetch(`https://api-xji1.onrender.com/oauth?authorization_code=${authcode}`, {
+                    method: 'GET'
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    accountId = data.account_id;
+                    secret = data.secret;
+                    deviceId = data.device_id;
+                    // Set profile image and info
+                    profileImage.src = data.image;
+                    profileInfo.textContent = `Logged in as: ${data.displayName}`;
+                    profileContainer.style.display = 'flex';
+                    errorMessage.style.display = 'none';
+                    responseMessage.textContent = '✅ Login successful!';
+                    responseMessage.style.display = 'block';
+                    actionsContainer.style.display = 'block';
+                    apiResponse.style.display = 'block';
+                    apiResponse.textContent = JSON.stringify(data, null, 2);
+                } else {
+                    errorMessage.textContent = `❌ Login failed: ${data.message}`;
+                    errorMessage.style.display = 'block';
+                    actionsContainer.style.display = 'none';
+                    apiResponse.style.display = 'block';
+                    apiResponse.textContent = JSON.stringify(data, null, 2);
+                }
+            } catch (error) {
+                errorMessage.textContent = '❌ An error occurred while processing the request.';
+                errorMessage.style.display = 'block';
+                actionsContainer.style.display = 'none';
+                apiResponse.style.display = 'none';
+            }
+        });
+        // Crown Submission Handler
+        document.getElementById('crown-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const amount = document.getElementById('crown-amount').value;
+            await submitRequest(`/api/v2/party/crowns`, { number: amount });
+        });
+        // Level Update Handler
+        document.getElementById('level-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const level = document.getElementById('level').value;
+            await submitRequest(`/api/v2/party/level`, { level: level });
+        });
+        // Ghost Equip Handler
+        document.getElementById('ghostequip-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const emote = document.getElementById('emote').value;
+            await submitRequest(`/api/v2/party/ghostequip`, { emote: emote });
+        });
+        // Fake Ready Handler
+        document.getElementById('ready-button').addEventListener('click', async function () {
+            isReady = !isReady;
+            if (isReady) {
+                await submitRequest(`/api/v2/party/fakeready`);
+                this.textContent = "Fake Unready";
+            } else {
+                await submitRequest(`/api/v2/party/fakeunready`);
+                this.textContent = "Fake Ready";
+            }
+        });
+        // Fake Unready Handler
+        document.getElementById('unready-button').addEventListener('click', async function () {
+            await submitRequest(`/api/v2/party/fakeunready`);
+        });
+        // Refresh Tokens Handler
+        document.getElementById('refresh-tokens').addEventListener('click', async function () {
+            try {
+                const response = await fetch(`https://account-public-service-prod.ol.epicgames.com/account/api/oauth/token?grant_type=client_credentials`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Basic ' + btoa('client_id:client_secret'),
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    secret = data.access_token;
+                    document.getElementById('response-message').textContent = '✅ Tokens refreshed successfully!';
+                } else {
+                    throw new Error(data.message || 'Failed to refresh tokens');
+                }
+            } catch (error) {
+                document.getElementById('error-message').textContent = '❌ ' + error.message;
+            }
+        });
+        async function submitRequest(endpoint, params = {}) {
+            const url = new URL(`https://api-xji1.onrender.com${endpoint}`);
+            url.searchParams.append('accountId', accountId);
+            url.searchParams.append('secret', secret);
+            url.searchParams.append('deviceId', deviceId);
+            for (const [key, value] of Object.entries(params)) {
+                url.searchParams.append(key, value);
+            }
+            const responseMessage = document.getElementById('response-message');
+            const errorMessage = document.getElementById('error-message');
+            const apiResponse = document.getElementById('api-response');
+            try {
+                const response = await fetch(url.toString(), {
+                    method: 'GET'
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    responseMessage.textContent = `✅ Request to ${endpoint} was successful!`;
+                    errorMessage.style.display = 'none';
+                    apiResponse.style.display = 'block';
+                    apiResponse.textContent = JSON.stringify(data, null, 2);
+                } else {
+                    errorMessage.textContent = `❌ An error occurred: ${data.message || 'Unknown error'}`;
+                    errorMessage.style.display = 'block';
+                    apiResponse.style.display = 'block';
+                    apiResponse.textContent = JSON.stringify(data, null, 2);
+                }
+            } catch (error) {
+                errorMessage.textContent = '❌ An error occurred while processing the request.';
+                errorMessage.style.display = 'block';
+                apiResponse.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

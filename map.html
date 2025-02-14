@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortnite Map Toggle</title>
+	<link rel="canonical" href="https://mtbr29.dev/map.html" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .container {
+            position: relative;
+            width: 80%;
+            max-width: 800px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        #mapImage {
+            width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        #toggleButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        #toggleButton:hover {
+            background-color: #0056b3;
+}
+        details {
+            margin-top: 20px;
+        }
+        details summary {
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .map-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .map-container img {
+            width: 45%; /* Adjust image size */
+            cursor: pointer;
+        }
+        .map-details {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>latest Seasons</h2>
+        <img id="mapImage" src="images/map.png" alt="Fortnite Map">
+        <button id="toggleButton">Show POI</button>
+        <div id="poiStatus">Show POI = false</div>
+<p>if it don't work reload the page</p>
+    </div>
+    <script>
+        const toggleButton = document.getElementById('toggleButton');
+        const mapImage = document.getElementById('mapImage');
+        const poiStatus = document.getElementById('poiStatus');
+        toggleButton.addEventListener('click', function () {
+            if (mapImage.src.includes('showPOI=true')) {
+                mapImage.src='images/map.png';
+                poiStatus.textContent = 'Show POI = false';
+                toggleButton.textContent = 'Show POI';
+            } else {
+                mapImage.src = 'https://media.fortniteapi.io/images/map.png?showPOI=true';
+                poiStatus.textContent = 'Show POI = true';
+                toggleButton.textContent = 'Hide POI';
+            }
+        });
+        // Fetch maps from the API
+        async function fetchMaps() {
+            try {
+                const response = await fetch('https://fortniteapi.io/v1/maps/list', {
+                    headers: {
+                        'Authorization': '08993cdd-3a470e83-32bcb596-d87bc1d5'
+                    }
+                });
+                const data = await response.json();
+                displayMaps(data);
+            } catch (error) {
+                console.error('Error fetching maps:', error);
+            }
+        }
+        function displayMaps(data) {
+            const mapsList = document.getElementById('mapsList');
+            const mapsByVersion = {};
+            // Classify maps by version
+            data.maps.forEach(map => {
+                const version = map.patchVersion;
+                const releaseDate = map.releaseDate;
+                const imgUrl = map.url; // URL of the map image without POI
+                const urlPOI = map.urlPOI; // URL of the map image with POI
+                if (!mapsByVersion[version]) {
+                    mapsByVersion[version] = [];
+                }
+                mapsByVersion[version].push({ imgUrl, urlPOI, releaseDate });
+            });
+            // Create details sections for each version
+            for (const version in mapsByVersion) {
+                const details = document.createElement('details');
+                const summary = document.createElement('summary');
+                summary.textContent = version + ' maps';
+                details.appendChild(summary);
+                mapsByVersion[version].forEach(map => {
+                    const mapContainer = document.createElement('div');
+                    mapContainer.className = 'map-container';
+                    const imgWithoutPOI = document.createElement('img');
+                    imgWithoutPOI.src = map.imgUrl;
+                    imgWithoutPOI.alt = version + ' map without POI';
+                    imgWithoutPOI.addEventListener('click', () => {
+                        openFullscreen(imgWithoutPOI);
+                    });
+                    const imgWithPOI = document.createElement('img');
+                    imgWithPOI.src = map.urlPOI;
+                    imgWithPOI.alt = version + ' map with POI';
+                    imgWithPOI.addEventListener('click', () => {
+                        openFullscreen(imgWithPOI);
+                    });
+                    mapContainer.appendChild(imgWithoutPOI);
+                    mapContainer.appendChild(imgWithPOI);
+                    const mapDetails = document.createElement('div');
+                    mapDetails.className = 'map-details';
+                    mapDetails.innerHTML = `
+                        <p>Release Date: ${map.releaseDate}</p>
+                    `;
+                    details.appendChild(mapContainer);
+                    details.appendChild(mapDetails);
+                });
+                mapsList.appendChild(details);
+            }
+        }
+        function openFullscreen(image) {
+            if (image.requestFullscreen) {
+                image.requestFullscreen();
+            } else if (image.mozRequestFullScreen) { // Firefox
+                image.mozRequestFullScreen();
+            } else if (image.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+                image.webkitRequestFullscreen();
+            } else if (image.msRequestFullscreen) { // IE/Edge
+                image.msRequestFullscreen();
+            }
+        }
+        // Fetch maps on page load
+        fetchMaps();
+    </script>
+</body>
+</html>

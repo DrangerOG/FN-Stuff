@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortnite Stats</title>
+	<link rel="canonical" href="https://mtbr29.dev/stats.html" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .result p {
+            margin: 5px 0;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<style> body { font-family: Arial, sans-serif; margin: 0; padding: 0; height: 2000px; } .navbar { background-color: #0ff; padding: 10px; position: fixed; top: 0; width: 100%; z-index: 1000; display: flex; justify-content: center; align-items: center; } .nav-links { list-style-type: none; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; flex-grow: 1; } .nav-links li { padding: 8px 16px; margin: 0 10px; display: flex; align-items: center; background-color: #007bff; border-radius: 25px; transition: background-color 0.3s; } .nav-links li:hover { background-color: #0056b3; } .nav-links a { color: white; text-decoration: none; display: flex; align-items: center; font-size: 18px; } .nav-links a img { width: 20px; height: 20px; margin-right: 8px; } .more-links { display: none; } button { background-color: #007bff; color: white; border: none; padding: 0.7em 1.5em; cursor: pointer; border-radius: 25px; margin-left: 1.5em; font-size: 1em; transition: background-color 0.3s; } button:hover { background-color: #0056b3; } .content { padding-top: 80px; color: white; } @media (max-width: 768px) { .navbar { padding: 8px; } .nav-links li { padding: 6px 12px; font-size: 16px; } button { padding: 0.5em 1em; font-size: 0.9em; } } @media (max-width: 480px) { .navbar { flex-direction: column; padding: 6px; } .nav-links { flex-direction: column; align-items: flex-start; } .nav-links li { margin: 5px 0; padding: 5px 10px; font-size: 14px; } button { padding: 0.4em 0.8em; font-size: 0.8em; margin-left: 0; margin-top: 10px; } } </style></head> <body> <nav class="navbar"> <ul class="nav-links"> <li><a href="index.html">Home|&#127968; </a></li> <li><a href="app.html">applications and tools|<!--🗔-->&#128468;</a></li> <li><a href="lobbytools.html">lobby tools|&#127918;   </a></li> <li><a href="paks/paks.html">Fortnite"s Paks and swaps|&#129513;</a></li> <li class="more-links"><a href="island.html">island search|🏝️</a></li> <li class="more-links"><a href="ipa-apk-download.html">ipa and apk download|📱</a></li> <li class="more-links"><a href="stats.html">fortnite stats|😎</a></li> </ul> <button id="toggleButton">Afficher Plus</button> </nav><script src="script.js"></script><br><br><br><br><br><br><br><br><br>    <div class="container">
+        <h1>Fortnite Stats</h1>
+        <div class="input-group">
+            <label for="username">Enter your Fortnite username:</label>
+            <input type="text" id="username" placeholder="Username">
+        </div>
+        <div class="input-group">
+            <label for="accountType">Account Type:</label>
+            <select id="accountType">
+                <option value="epic">Epic</option>
+                <option value="psn">PSN</option>
+                <option value="xbl">Xbox Live</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label for="timeWindow">Time Window:</label>
+            <select id="timeWindow">
+                <option value="lifetime">Lifetime</option>
+                <option value="season">Season</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label for="image">Platform for Image:</label>
+            <select id="image">
+                <option value="all">All</option>
+                <option value="keyboardMouse">Keyboard & Mouse</option>
+                <option value="gamepad" selected>Gamepad</option>
+                <option value="touch">Touch</option>
+            </select>
+        </div>
+        <button id="submit">Submit</button>
+        <div class="result" id="result"></div>
+    </div>
+    <script>
+        document.getElementById('submit').addEventListener('click', function() {
+            const username = document.getElementById('username').value.trim();
+            const accountType = document.getElementById('accountType').value;
+            const timeWindow = document.getElementById('timeWindow').value;
+            const image = document.getElementById('image').value;
+            if (!username) {
+                document.getElementById('result').innerHTML = '<p class="error">Please enter a username.</p>';
+                return;
+            }
+            // Clear previous results
+            document.getElementById('result').innerHTML = '';
+            // API Key
+            const apiKey = '6d1570d8-73a7-4b23-85d9-8826ff6a39a7';
+            // Fetch stats using the Fortnite API
+            fetch(`https://fortnite-api.com/v2/stats/br/v2?name=${username}&accountType=${accountType}&timeWindow=${timeWindow}&image=${image}`, {
+                headers: { 'Authorization': apiKey }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const result = document.getElementById('result');
+                if (data.status !== 200 || !data.data.account.name) {
+                    result.innerHTML = '<p class="error">Username not found.</p>';
+                    return;
+                }
+                result.innerHTML = `
+                    <p><strong>Username:</strong> ${data.data.account.name}</p>
+                    <p><strong>Wins:</strong> ${data.data.stats.all.overall.wins}</p>
+                    <p><strong>Kills:</strong> ${data.data.stats.all.overall.kills}</p>
+                    <p><strong>Matches:</strong> ${data.data.stats.all.overall.matches}</p>
+                    <p><strong>Battle Pass Level:</strong> ${data.data.battlePass.level}</p>
+                    <img src="${data.data.image}" alt="Generated Image" style="max-width: 100%;">
+                `;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('result').innerHTML = '<p class="error">An error occurred. Please try again later.</p>';
+            });
+        });
+    </script>
+</body>
+</html>

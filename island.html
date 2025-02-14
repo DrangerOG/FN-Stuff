@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="style.css" rel="stylesheet" type="text/css"/>
+  <link rel="icon" >
+ <meta property="og:title" content="🏝️Island search🔍">
+    <meta property="og:description" content="🔍search any 🏝️island with there code🔢">
+    <meta property="og:image" content="vBQBapgBlladPHaGNU/image/landscape_comp.jpg">
+    <meta property="og:url" content="https://mtbr29.dev">
+    <meta property="og:type" content="website">
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="🏝️Island search🔍">
+    <meta name="twitter:description"🔍search any 🏝️island with there code🔢">
+    <meta name="twitter:image" content="vBQBapgBlladPHaGNU/image/landscape_comp.jpg">
+    <meta name="twitter:url" content="https://mtbr29.dev">
+<title>m29- island search</title>
+	<link rel="canonical" href="https://mtbr29.dev/island.html" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        input[type="text"]:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #ffcc00;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background-color: #ff9900;
+            transform: scale(1.05);
+        }
+        button:active {
+            background-color: #e68a00;
+            transform: scale(1);
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            max-width: 400px;
+            width: 100%;
+            margin-top: 20px;
+            text-align: left;
+        }
+        .card img {
+            width: 100%;
+            height: auto;
+        }
+        .card-content {
+            padding: 20px;
+        }
+        .card-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .card-description {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .card-details {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .card-details span {
+            font-weight: bold;
+            color: #333;
+        }
+        .tags {
+            margin-top: 10px;
+        }
+        .tags span {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<style> body { font-family: Arial, sans-serif; margin: 0; padding: 0; height: 2000px; } .navbar { background-color: #0ff; padding: 10px; position: fixed; top: 0; width: 100%; z-index: 1000; display: flex; justify-content: center; align-items: center; } .nav-links { list-style-type: none; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; flex-grow: 1; } .nav-links li { padding: 8px 16px; margin: 0 10px; display: flex; align-items: center; background-color: #007bff; border-radius: 25px; transition: background-color 0.3s; } .nav-links li:hover { background-color: #0056b3; } .nav-links a { color: white; text-decoration: none; display: flex; align-items: center; font-size: 18px; } .nav-links a img { width: 20px; height: 20px; margin-right: 8px; } .more-links { display: none; } button { background-color: #007bff; color: white; border: none; padding: 0.7em 1.5em; cursor: pointer; border-radius: 25px; margin-left: 1.5em; font-size: 1em; transition: background-color 0.3s; } button:hover { background-color: #0056b3; } .content { padding-top: 80px; color: white; } @media (max-width: 768px) { .navbar { padding: 8px; } .nav-links li { padding: 6px 12px; font-size: 16px; } button { padding: 0.5em 1em; font-size: 0.9em; } } @media (max-width: 480px) { .navbar { flex-direction: column; padding: 6px; } .nav-links { flex-direction: column; align-items: flex-start; } .nav-links li { margin: 5px 0; padding: 5px 10px; font-size: 14px; } button { padding: 0.4em 0.8em; font-size: 0.8em; margin-left: 0; margin-top: 10px; } } </style></head> <body> <nav class="navbar"> <ul class="nav-links"> <li><a href="index.html">Home|&#127968; </a></li> <li><a href="app.html">applications and tools|<!--🗔-->&#128468;</a></li> <li><a href="lobbytools.html">lobby tools|&#127918;   </a></li> <li><a href="paks/paks.html">Fortnite"s Paks and swaps|&#129513;</a></li> <li class="more-links"><a href="island.html">island search|🏝️</a></li> <li class="more-links"><a href="ipa-apk-download.html">ipa and apk download|📱</a></li> <li class="more-links"><a href="stats.html">fortnite stats|😎</a></li> </ul> <button id="toggleButton">Afficher Plus</button> </nav><script src="script.js"></script><br><br><br><br><br><br><br><br><br><div class="container">
+    <input type="text" id="codeInput" maxlength="14" placeholder="Entrez 12 chiffres (ex: 4568-4759-9631)">
+    <button onclick="submitCode()">Submit</button>
+    <div id="result"></div>
+</div>
+<script>
+    const codeInput = document.getElementById('codeInput');
+    const resultDiv = document.getElementById('result');
+    // Ajouter des tirets automatiquement après chaque série de 4 chiffres
+    codeInput.addEventListener('input', function (e) {
+        let value = e.target.value.replace(/\D/g, '').substring(0, 12);
+        value = value.replace(/(\d{4})(\d{4})(\d{4})/, '$1-$2-$3');
+        codeInput.value = value;
+    });
+    // Fonction pour envoyer une requête GET à l'API et afficher les résultats
+    function submitCode() {
+        const code = codeInput.value;
+        if (code.length === 14) {
+            const url = `https://api-xji1.onrender.com/api/v1/island?code=${code}`;
+            fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data.result) {
+                    displayIslandData(data.island);
+                } else {
+                    resultDiv.textContent = 'Aucune information trouvée pour ce code.';
+                }
+            })
+            .catch(error => {
+                resultDiv.textContent = `Erreur: ${error}`;
+            });
+        } else {
+            resultDiv.textContent = 'Veuillez entrer un code valide de 12 chiffres.';
+        }
+    }
+    // Fonction pour afficher les données de l'île dans une carte
+    function displayIslandData(island) {
+        resultDiv.innerHTML = `
+        <div class="card">
+            <img src="${island.image}" alt="Image de l'Île">
+            <div class="card-content">
+                <div class="card-title">${island.title}</div>
+                <div class="card-description">${island.description.replace(/\n/g, '<br>')}</div>
+                <div class="card-details">
+                    <p><span>Code :</span> ${island.code}</p>
+                    <p><span>Créateur :</span> ${island.creator}</p>
+                    <p><span>Créateur Code :</span> ${island.creatorCode}</p>
+                    <p><span>Date de publication :</span> ${new Date(island.publishedDate).toLocaleDateString()}</p>
+                    <p><span>XP Activé :</span> AN ERROR HAS OCCURED :(</p>
+                </div>
+                <div class="tags">
+                    ${island.tags.map(tag => `<span>${tag}</span>`).join('')}
+                </div>
+            </div>
+        </div>`;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+
+
+        @font-face {
+          font-family: ftn;
+          src: url(ftn.ttf);
+        }
+        div{
+          font-family: ftn;
+        }
